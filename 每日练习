@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+//#include<string.h>
+//struct store
+//{
+//	char name[20];
+//	int price;
+//	char* technician;
+//	char* project;
+//};
+struct Book
+{
+	char name[20];
+	char author[10];
+	char store[10];
+	int price;
+};
+int main()
+{
+	struct Book b1 = {"三体","刘慈欣","新华书店",45};
+	/*struct Book* c = &b1;
+	printf("%s\n", (*c).name);
+	printf("%s\n", c->name);*/
+	strcpy(b1.name,"流浪地球");
+	//strcpy(b1.author, "林娜");
+	b1.price = 5;
+	printf("《%s》\n", b1.name);
+	printf("%s\n", b1.author);
+	printf("%s\n", b1.store);
+	printf("%d\n", b1.price);
+	return 0;
+}
+//int main()
+//{
+//	struct store s1 = { "红浪漫",698,"王刚","一条龙" };
+//	printf("%s\n", s1.name);
+//	printf("%d\n", s1.price);
+//	printf("%s\n", s1.technician);
+//	printf("%s\n", s1.project);
+//	return 0;
+//}
