@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+const char* WeekYearday(int years, int months, int days)
+{
+    int WeekDay = -1;
+    if (1 == months || 2 == months)
+    {
+        months += 12;
+        years--;
+    }
+    WeekDay = (days + 1 + 2 * months + 3 * (months + 1) / 5 + years + years / 4 - years / 100 + years / 400) % 7;
+    switch (WeekDay)
+    {
+    case 0:
+        return "星期天[Sunday]";
+        break;
+    case 1:
+        return "星期一[Monday]";
+        break;
+    case 2:
+        return "星期二[Tuesday]";
+        break;
+    case 3:
+        return "星期三[Wednesday]";
+        break;
+    case 4:
+        return "星期四[Thursday]";
+        break;
+    case 5:
+        return "星期五[Friday]";
+        break;
+    case 6:
+        return "星期六[Saturday]";
+        break;
+    default:
+        return NULL;
+        break;
+    }
+    return NULL;
+}
+
+int main()
+{
+	int year, month, day;
+	char ch = '1';
+	while (ch != '\033')
+	{
+		printf("\n请输入日期：\n格式为：1900,1,1\n");
+		scanf_s("%d,%d,%d", &year, &month, &day);
+		const char* p = WeekYearday(year, month, day);
+		printf("今天是:%s\n", p);
+		ch = getchar();
+		printf("\n");
+	}
+	return 0;
+}
