@@ -1,0 +1,58 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+//求n的阶乘
+int main()
+{
+	int i = 0;
+	int n = 0;
+	int a = 1;
+	int sum = 0;
+	scanf("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		a = a * i;
+	}
+	printf("%d\n", a);
+	return 0;
+}
+
+//求从1开始到x的阶乘的和  例如x=3, sum = 1!+2!+3！
+int main()
+{
+	int i = 0;
+	int n = 0;
+	int sum = 0;
+	int x = 0;
+	printf("please input a number x:>\n");
+	scanf("%d", &x);
+	for (n = 1; n <= x; n++)
+	{
+		int a = 1;
+		for (i = 1; i <= n; i++)
+		{
+			a = a * i;
+		}
+		sum = sum + a;
+	}
+	printf("sum= %d\n", sum);
+	return 0;
+}
+ 
+//求从1开始到x的阶乘的和 （更简便）
+int main()
+{
+	int i = 0;
+	int n = 0;
+	int sum = 0;
+	int a = 1;
+	printf("please input a number x:>\n");
+	scanf("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		a = a * i;
+		sum = sum + a;
+	}
+	printf("阶乘=%d\n", a);
+	printf("从1开始到x的阶乘的和= %d\n", sum);
+	return 0;
+}
