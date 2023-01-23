@@ -1,0 +1,65 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+//求两数的最大公约数
+int main()
+{
+	int i = 0;
+	int m = 0;
+	int n = 0;
+	scanf("%d%d", &m, &n);
+	while (i=m % n)
+	{
+		m = n;
+		n = i;
+	}
+	printf("最大公约数=%d\n",n);
+	return 0;
+}
+
+//求一段时间内闰年的年份和数量
+int main()
+{
+	int year = 0;
+	int x = 0, y = 0;
+	int i = 0;
+	printf("请输入要查询的时间段(哪年到哪年): ");
+	scanf("%d%d", &x, &y);
+	printf("闰年年份:");
+	for (year = x; year <= y; year++)
+	{
+		if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+		{
+			printf("%d ", year);
+			i++;
+		}
+	}
+	printf("\n闰年一共有 %d 年\n", i);
+	return 0;
+
+//求一段数内的素数和素数个数
+int main()
+{
+	int i = 0;
+	int x = 0, y = 0;
+	int a = 0;
+	printf("请输入要查找的数段(x->y):");
+	scanf("%d%d", &x, &y);
+	for (i = x; i <= y; i++)
+	{
+		int j = 0;
+		for (j = 2; j < i; j++)
+		{
+			if (i % j == 0)
+			{
+				break;
+			}
+	    }
+		if (i == j)
+		{
+			printf("%d ", i);
+			a++;
+		}
+	}
+	printf("\n素数个数:%d", a);
+	return 0;
+}
