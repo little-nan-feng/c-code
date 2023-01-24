@@ -1,0 +1,127 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+void menu1()//菜单1
+{
+	printf("*****************************\n");
+	printf("*****1.play       0.exit*****\n");
+	printf("*****************************\n");
+}
+
+void menu2()//菜单2
+{
+	printf("******* 1.easy      ******\n");
+	printf("******* 2.mid       ******\n");
+	printf("******* 3.difficult ******\n");
+}
+
+void game()//游戏主体函数
+{
+	int r = 0;//接收你猜的数字
+	int i = 0;
+	int j = 0;
+	int y = 0;
+	int x = rand()%100+1;//rand()函数--生成一个随机数--此处规定范围是0~100(通过取模)
+	//rand()函数范围:0~RAND_MAX--即0~32767--rand()函数需引用include<stdlib.h>
+	//printf("%d\n", x);
+	menu2();
+	printf("请选择难度>:");
+	scanf_s("%d", &y);
+	switch (y)
+	{
+	case 1:
+		j = 15;
+		break;
+	case 2:
+		j = 10;
+		break;
+	case 3:
+		j = 5;
+		break;
+	default:
+		printf("选择错误\n");
+	}
+	printf("数字已生成\n");
+	//if()判断也可以，switch()判断也可以
+	//if (y = 1)
+	//{
+	//	j = 15;
+	//}
+	//else if (y = 2)
+	//{
+	//	j = 10;
+	//}
+	//else if (y = 3)
+	//{
+	//	j = 5;
+	//}
+	//else
+	//	printf("选择错误\n");
+	while (i<=j)
+	{
+		printf("请猜数字>:");
+		scanf_s("%d", &r);
+		if (r > x)
+		{
+			printf("猜大了,憨包\n");
+			printf("\n");
+		}
+		else if(r<x)
+		{
+			printf("猜小了，憨包\n");
+			printf("\n");
+		}
+		else
+		{
+			printf("恭喜你，猜对啦！\n");
+			break;
+		}
+		i++;
+		if (i == j)
+		{
+			printf("没机会了，憨包\n");
+			break;
+		}
+	}
+}
+
+int main()
+{
+	srand((unsigned int)time(NULL));
+	//不要频繁调用srand()--因此放在主函数内，不放在game()函数内
+	//在调用rand()之前使用srand()设置一个随机数生成器--此处用时间戳来生成一个随机数起始点
+	//time()函数--获取时间戳(秒)=当前计算机时间-计算机起始时间(1970.1.1.0:0:0)--需引用include<time.h>
+	int input = 0;
+	do
+	{
+		menu1();
+		printf("请选择>:");
+		scanf_s("%d", &input);
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("选择出错\n");
+			break;
+		}
+	} while (input);
+	return 0;
+}
+//srand()函数放在主函数内，在运行本代码时只调用一次生成一个随机数的起始值；
+//只使用rand()函数的话，每次调用生成的随机数会相同
+
+/*srand()函数也需要一个整型来确定随机数生成器的起始点，如果这个整型是一个常量的话，
+会导致起始点始终相同，导致rand()函数生成的随机数相等；
+因此需要在srand()函数条件域内也设置一个随机数，
+来使得随机数起始点不同，才能使rand()函数生成不同的随机数，
+此处使用time()函数来调用时间戳--时间戳随时都在变；(刚好符合要求)*/
+//学习此函数时发生过套娃事件
+
+//do{}while ()函数--最少执行 一次操作；
