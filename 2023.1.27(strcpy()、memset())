@@ -1,0 +1,22 @@
+//strcpy() 函数--字符串拷贝
+//int main()
+//{
+//	char arr[20] = "I LOVE YOU SO MUCH!";
+//	char arr2[20] =" ";
+//	int a = 0;
+//	//scanf_s("%s\n", arr2,40);
+//	a =strlen(arr);
+//	strcpy(arr2, arr);
+//	printf("%s\n", arr);
+//	printf("%d\n",a);
+//	return 0;
+//}
+
+//memset(要更改的地址，更改成的值，要更改的值的个数)函数--从第一个字符开始，更改字符
+int main()
+{
+	char arr[] = "I LOVE YOU!";
+	memset(arr, 'U', 1);
+	printf("%s\n", arr);
+	return 0;
+}
