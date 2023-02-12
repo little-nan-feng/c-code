@@ -1,0 +1,119 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<string.h>
+
+//函数递归-
+//递归的条件：一定要有一个限制条件（满足条件时递归不再继续）、每次递归调用后越来越接近这个限制条件
+
+////函数-输入一个数，按位打印
+//void print(int a)
+//{
+//	if (a > 9)
+//	{
+//		print(a / 10);
+//
+//	}
+//	printf("%d ", a%10);
+//}
+//int main()
+//{
+//	unsigned int n = 0;
+//	scanf("%d", &n);
+//	print(n);
+//	return 0;
+//}
+
+
+//函数-计算字符串长度-有临时变量
+//int my_strlen(char* str)
+//{
+//	int count = 0;
+//	while (*str != '\0')
+//	{
+//		count++;
+//		str++;
+//	 }
+//	return count;
+//}
+
+//函数-计算字符串长度-无临时变量-利用递归方法
+//int my_strlen(char* str)
+//{
+//	if (*str != '\0')
+//		return 1 + my_strlen(str + 1);
+//	else
+//		return 0;
+//}
+//
+//int main()
+//{
+//	char arr[50] = "hello world!";
+//	//printf("%d\n", strlen(arr));
+//	int len = my_strlen(arr);
+//	printf("%d\n", len);
+//	return 0;
+//}
+
+
+////函数-求n的阶乘-迭代
+//int Fac1(int n)
+//{
+//	int i = 0;
+//	int ret = 1;
+//	for (i = 1; i <= n; i++)
+//	{
+//		ret *= i;
+//	}
+//	return ret;
+//}
+//
+////函数-求n的阶乘-递归
+//int Fac2(int n)
+//{
+//	if (n <= 1)
+//		return 1;
+//	else
+//		return n * Fac2(n - 1);
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	int ret = 0;
+//	scanf("%d", &n);
+//	ret=Fac2(n);
+//	printf("%d\n", ret);
+//}
+
+
+//函数-计算第n个斐波那契数-递归（效率极低）
+//int Fib1(int n)
+//{
+//	if (n <= 2)
+//		return 1;
+//	else
+//		return Fib1(n - 1) + Fib1(n - 2);
+//}
+
+//函数-计算第n个斐波那契数-迭代
+//int Fib2(int n)
+//{
+//	int a = 1, b = 1, c = 1;
+//	while (n > 2)
+//	{
+//		c = a + b;
+//		a = b;
+//		b = c;
+//		n--;
+//	}
+//	return c;
+//}
+//int main()
+//{
+//	int n = 0;
+//	int ret = 0;
+//	scanf("%d", &n);
+//	ret = Fib2(n);
+//	printf("ret= %d\n", ret);
+//	return 0;
+//}
