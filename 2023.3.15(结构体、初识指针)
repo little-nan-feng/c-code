@@ -1,0 +1,96 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+
+
+//结构体-创建一个类型struct Stu-利用这个类型定义一个变量a1,并初始化
+//struct Stu
+//{
+//	char id[20];
+//	int age;
+//	char name[30];
+//	char major[30];
+//};
+//int main()
+//{
+//	struct Stu a1 = { "20210202705",20,"魏一凡","计科" };
+//	struct Stu* p=&a1;
+//	//printf("%d\n", (*p).age);
+//	printf("%d\n", p->age);
+//	//结构体指针->成员名
+//	
+//	//printf("%s\n", a1.id);
+//	//printf("%d\n",a1.age);
+//	//printf("%s\n",a1.name);
+//	//printf("%s\n",a1.major);
+//	////结构体变量.成员名
+//	return 0;
+//}
+
+
+//int main()
+//{
+//	char a = 3;
+//	char b = 127;
+//	char c = a + b;
+//	printf("%d\n", c);
+//	return 0;
+//}
+
+
+//int  main()
+//{
+//	//int a = 0x11223344;
+//	char* a = 0x11223344;
+//	//int* pa=&a;
+//	char* pa = &a;
+//	*pa = 0;
+//	return 0;
+//}
+
+//指针变量存放的是地址-指针类型决定了该指针在解引用操作时，能够访问的空间的大小
+//例如-当为int* p时，*p 能够访问4个字节
+//当为char* p时，*p 能够访问1个字节
+//当为double* p时，*p 能够访问8个字节
+
+
+
+//int main()
+//{
+//	int a = 0x11223344;
+//	int* pa = &a;
+//	char* pc = &a;
+//	printf("%p\n", pa);
+//	printf("%p\n", pa+1);
+//	printf("%p\n", pc);
+//	printf("%p\n", pc+1);
+//	return 0;
+//}
+//
+////指针类型决定了指针的步长-即指针移动一步，访问的内存空间变化的大小
+////例如-int*p，p移动一步，访问空间变化4个字节-整型就是变化一个整型空间 
+////char*p,p移动一步，访问空间变化一个字节-字符型就是变化一个字符即一个字节
+////double*p，p移动一步，访问空间变化8个字节-双精度就是变化一个双精度空间即8个字节
+
+
+int my_strlen(char* p)
+{
+	char* start=p;
+	char* end = p;
+	while (*end!='\0')
+	{
+		end++;
+	}
+	return end - start;
+}
+
+//尾指针减去头指针得到之间的元素个数
+int main()
+{
+	//用指针方法实现strlen-求字符串长度-思想：通过遍历字符串找到\0，遍历结束，然后用尾指针地址减去头指针地址即为字符个数
+	//char arr[] = "hello world!";
+	char* arr[50] = {0};
+	scanf("%s\n",arr);
+	int i = my_strlen(arr);
+	printf("%d\n", i);
+	return 0;
+}
