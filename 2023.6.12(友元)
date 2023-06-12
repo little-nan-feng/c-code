@@ -1,0 +1,184 @@
+#include<iostream>
+using namespace std;
+#include<string>
+
+////this指针-是隐含每一个非静态成员函数内的一种指针
+////不需要定义，可直接使用
+//
+//
+////this指针 指向的是 被调用的成员函数所属的对象
+//class Person {
+//public:
+//	Person(int age)
+//	{
+//		this->age = age;
+//	}
+//
+//	//返回对象本身要用&类型 例如Person&-如果以值的方式返回，会调用一次拷贝构造函数创建一个新的对象将其返回，不是原对象本身
+//	// 用引用方式就是返回原对象本身
+//	//*this返回的是对象本身
+//	Person& PersonAddAge(Person &p) {
+//		this->age += p.age;
+//		//this指向p2的指针，而*this指向的是p2这个对象本身
+//		return *this;
+//	}
+//	int age;
+//};
+//
+////1、解决名称冲突
+//void test01(){
+//	Person p1(19);
+//		cout << "p1的年纪为：" << p1.age << endl;
+//}
+//
+////2、返回对象本身用 *this
+//void test02() {
+//	Person p1(18);
+//
+//	Person p2(18);
+//
+//	//链式编程思想
+//	p2.PersonAddAge(p1).PersonAddAge(p1).PersonAddAge(p1).PersonAddAge(p1);
+//
+//	cout << "p2的年纪为：" << p2.age << endl;
+//}
+//
+//
+//int main()
+//{
+//	//test01();
+//	test02();
+//	return 0;
+//}
+
+
+////const 修饰成员函数-称为常函数
+////常函数内不可以修改成员属性
+////成员属性声明时加上关键字mutable后，在常函数中依然可以修改
+//
+//
+////this指针的本质是一个指针常量  this的指向不可改变
+////等价于 Person* const this
+//class Person {
+//public:
+//	//成员函数后面加const,修饰的是this的指向，让指针的指向不可改变
+//	//此时这个成员函数就是常函数
+//	void showPerson() const
+//		//const加在这个位置 就等价于const Person* this
+//		//此时this指向的值不可改变
+//	{
+//		//this->m_Age = 100;
+//		//this = NULL; this的指向是不可以更改的
+//
+//		this->m_B = 100;
+//	}
+//	int m_A;
+//	mutable int m_B;//（特殊变量），加上mutable关键字，使得即使在常函数中，值也可以修改
+//};
+//
+////声明对象前加上const 称为常对象
+////常对象只能调用常函数
+//void test02()
+//{
+//	const Person p;//在对象前加上const 变为常对象
+//	//p.m_A = 10;//此时m_A的值不可修改
+//	p.m_B = 100;//m_B有mutable关键字修饰，所以在常对象下也可修改
+//
+//	//常对象只能调用常函数 因为普通成员函数可以修改成员变量的值
+//}
+
+//
+////友元-关键字为friend-让一个函数或者类 访问另一个类中的私有成员
+////类做友元
+////成员函数做友元
+//class Building
+//{
+//	//声明全局函数goodgay()函数为Building类的友元
+//	friend void goodgay(Building &building);
+//public:
+//	Building()
+//	{
+//		settingroom = "客厅";
+//		bedroom = "卧室";
+//	}
+//	string settingroom;
+//private:
+//	string bedroom;
+//};
+//
+//
+////全局函数做友元
+//void goodgay(Building &building)
+//{
+//	cout << "正在访问：" << building.settingroom << endl;
+//	cout << "正在访问：" << building.bedroom << endl;
+//
+//}
+//
+//void test01()
+//{
+//	Building building;
+//	goodgay(building);
+//}
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+
+
+////类做友元
+//class Building {
+//public:
+//	friend class goodgay;
+//	//类做友元，可以访问私有属性
+//	Building();
+//	string m_settingroom;
+//private:
+//	string m_bedroom;
+//};
+//
+//
+////类外写成员函数-需标明作用域
+//Building::Building() {
+//	this->m_bedroom = "卧室";
+//	this->m_settingroom = "客厅";
+//}
+//
+//class goodgay {
+//public:
+//	goodgay();
+//	void visit();
+//	Building* building;
+//};
+//
+//goodgay::goodgay()
+//{
+//	//创建一个建筑物对象
+//	building = new Building;
+//
+//}
+//
+//void goodgay::visit()
+//{
+//	cout << "好基友正在访问：" << building->m_settingroom << endl;
+//	cout << "好基友正在访问：" << building->m_bedroom << endl;
+//
+//}
+//
+//void test01()
+//{
+//	goodgay gg;
+//	gg.visit();
+//}
+//
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+
+
+//成员函数做友元-在类内用关键字friend声明友元函数即可
