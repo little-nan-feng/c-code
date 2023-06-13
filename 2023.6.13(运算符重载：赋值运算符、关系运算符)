@@ -1,0 +1,134 @@
+#include<iostream>
+using namespace std;
+
+
+////赋值运算符重载
+//class Person 
+//{
+//public:
+//	int *m_Age;
+//
+//	Person(int age)
+//	{
+//		//把年龄数据开辟到堆区
+//		m_Age = new int(age);
+//	}
+//
+//	~Person()
+//	{
+//		if (m_Age != NULL)
+//		{
+//			delete m_Age;
+//			m_Age = NULL;
+//		}
+//	}
+//
+//	//重载赋值运算符
+//	Person& operator=(Person &p)
+//	{
+//		//浅拷贝  --浅拷贝在释放空间时，会出现重复释放的问题，导致出错
+//		//m_Age = p.m_Age;
+//
+//		//判断m_Age是否已经在堆区创建了一块空间，有就释放掉
+//		if (m_Age != NULL)
+//		{
+//			delete m_Age;
+//			m_Age = NULL;
+//		}
+//
+//		//深拷贝
+//		m_Age = new int(*p.m_Age);
+//		//返回对象本身
+//		return *this;
+//	}
+//
+//};
+//
+//void test01()
+//{
+//	Person p1(18);
+//	Person p2(20);
+//	Person p3(30);
+//	p1 = p2 = p3;//因为返回的是对象本身，可以实现连续赋值操作
+//	cout << "p1的年龄为：" << *p1.m_Age << endl;
+//	cout << "p2的年龄为：" << *p2.m_Age << endl;
+//	cout << "p3的年龄为：" << *p3.m_Age << endl;
+//
+//
+//}
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+
+
+
+//重载关系运算符
+class Person
+{
+public:
+	string m_Name;
+	int m_Age;
+
+	Person(string name,int age)
+	{
+		m_Name = name;
+		m_Age = age;
+	}
+
+	//布尔型函数-重载关系运算符--如 == < > <= >= != 这些关系运算符
+	bool operator==(Person& p)
+	{
+		if (this->m_Name == p.m_Name && this->m_Age == p.m_Age)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	bool operator!=(Person &p)
+	{
+		if (this->m_Name == p.m_Name && this->m_Age == p.m_Age)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+};
+
+
+
+void test01()
+{
+	Person p1("南风", 20);
+	Person p2("南风", 20);
+	if(p1==p2)
+	{
+		cout << "p1和p2是相等的！" << endl;
+	}
+	else
+	{
+		cout << "p1和p2是不相等的！" << endl;
+	}
+	if (p1 != p2)
+	{
+		cout << "p1和p2是不相等的！" << endl;
+	}
+	else
+	{
+		cout << "p1和p2是相等的！" << endl;
+	}
+}
+
+int main()
+{
+	test01();
+	return 0;
+}
