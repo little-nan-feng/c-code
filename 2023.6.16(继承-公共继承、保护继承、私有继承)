@@ -1,0 +1,283 @@
+#include<iostream>
+using namespace std;
+
+
+////普通语句实现
+////Java类
+//class Java
+//{
+//public:
+//	void header()
+//	{
+//		cout << "这是头部内容（公共内容）" << endl;
+//	}
+//	void footer()
+//	{
+//		cout << "这是底部内容（公共内容）" << endl;
+//	}
+//	void left()
+//	{
+//		cout << "这是左部内容（公共内容）" << endl;
+//	}
+//	void content()
+//	{
+//		cout << "Java内容下载" << endl;
+//	}
+//};
+//
+////Python类
+//class Python
+//{
+//public:
+//	void header()
+//	{
+//		cout << "这是头部内容（公共内容）" << endl;
+//	}
+//	void footer()
+//	{
+//		cout << "这是底部内容（公共内容）" << endl;
+//	}
+//	void left()
+//	{
+//		cout << "这是左部内容（公共内容）" << endl;
+//	}
+//	void content()
+//	{
+//		cout << "Python内容下载" << endl;
+//	}
+//};
+//
+////C++类
+//class CPP
+//{
+//public:
+//	void header()
+//	{
+//		cout << "这是头部内容（公共内容）" << endl;
+//	}
+//	void footer()
+//	{
+//		cout << "这是底部内容（公共内容）" << endl;
+//	}
+//	void left()
+//	{
+//		cout << "这是左部内容（公共内容）" << endl;
+//	}
+//	void content()
+//	{
+//		cout << "C++内容下载" << endl;
+//	}
+//};
+
+
+////继承方式实现
+//class Public
+//{
+//public:
+//	void header()
+//	{
+//		cout << "这是头部内容（公共内容）" << endl;
+//	}
+//	void footer()
+//	{
+//		cout << "这是底部内容（公共内容）" << endl;
+//	}
+//	void left()
+//	{
+//		cout << "这是左部内容（公共内容）" << endl;
+//	}
+//};
+//
+////Java类
+//class Java :public Public
+//{
+//public:
+//	void content()
+//	{
+//		cout << "Java内容下载" << endl;
+//	}
+//};
+//
+////Python类
+//class Python :public Public
+//{
+//public:
+//	void content()
+//	{
+//		cout << "Python内容下载" << endl;
+//	}
+//};
+//
+////C++类
+//class CPP :public Public
+//{
+//public:
+//	void content()
+//	{
+//		cout << "C++内容下载" << endl;
+//	}
+//};
+//
+//void test01()
+//{
+//	Java ja;
+//	Python py;
+//	CPP cpp;
+//
+//	ja.header();
+//	ja.footer();
+//	ja.left();
+//	ja.content();
+//	cout << "-------------------" << endl;
+//
+//	py.header();
+//	py.footer();
+//	py.left();
+//	py.content();
+//	cout << "-------------------" << endl;
+//
+//	cpp.header();
+//	cpp.footer();
+//	cpp.left();
+//	cpp.content();
+//}
+//
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+
+
+//继承的方式-好处：减少重复代码
+//语法：class 子类 ：继承方式 父类
+//子类 也称为 派生类
+//父类 也称为 基类
+
+
+
+////父类
+//class Base1
+//{
+//public:
+//	int m_A;
+//protected:
+//	int m_B;
+//private:
+//	int m_C;
+//};
+//
+//
+////公共继承-父类中成员是什么访问权限，在子类中也是相同的访问权限-即公共还是公共，保护还是保护，私有还是私有
+//class Son1 : public Base1
+//{
+//public:
+//	void func()
+//	{
+//		m_A = 100;
+//		m_B = 100;
+//		//m_C = 100;//父类私有属性不管什么继承方式都不可访问
+//	}
+//};
+//
+//void func1()
+//{
+//	Son1 son1;
+//	son1.m_A = 100;
+//	//son1.m_B = 100;//m_B继承后是保护权限，类外无法访问
+//}
+//
+////保护继承-父类中的成员继承过来后在子类中都变为保护权限
+//class Son2 : protected Base1
+//{
+//public:
+//	void func()
+//	{
+//		m_A = 100;//保护权限，类内可以访问
+//		m_B = 100;//保护权限，类内可以访问
+//		//m_C = 100;//父类私有属性不管什么继承方式都不可访问
+//	}
+//};
+//
+//void func2()
+//{
+//	Son2 son2;
+//	//son2.m_A = 100;//m_A继承后是保护权限，类外无法访问
+//	//son2.m_B = 100;//m_B继承后是保护权限，类外无法访问
+//}
+//
+////私有继承-父类中的成员继承后在子类中都变为私有属性
+//class Son3 : private Base1
+//{
+//public:
+//	void func()
+//	{
+//		m_A = 100;//
+//		m_B = 100;
+//		//m_C = 100;//父类私有属性不管什么继承方式都不可访问
+//	}
+//};
+//
+//void func3()
+//{
+//	Son3 son3;
+//	//son3.m_A = 100;//m_A继承后变为私有属性，类外无法访问
+//	//son3.m_B = 100;//m_B继承后变为私有属性，类外无法访问
+//}
+//
+//class Grandson : public Son3
+//{
+//public:
+//	void func()
+//	{
+//		//m_A = 100;
+//		//m_B = 100;
+//		//上面两个成员在Son3中变为私有属性，即使是Son3的子类Grandson，也无法访问，也无法访问父类Base1中的私有属性m_C
+//	}
+//};
+
+//公共继承-父类中属于什么权限，公共继承到子类中后也是相应的权限
+
+//保护继承-不管父类中属于什么权限，保护继承到子类中后都变为保护权限
+
+//私有继承-不管父类中属于什么权限，私有继承到子类中后都变为私有权限
+
+//注意：父类中的私有属性，不管是什么继承方式，在子类中都无法访问
+
+
+
+
+class Base
+{
+public:
+	int m_A;
+protected:
+	int m_B;
+private:
+	int m_C;
+};
+
+class Son : public Base
+{
+public:
+	int m_D;
+};
+//父类中的非静态成员函数都被继承到子类中，只是编译器将其隐藏了，无法访问
+//但是还是会为其分配空间
+void test01()
+{
+	cout << "size of Son = " << sizeof(Son) << endl;
+}
+
+int main()
+{
+	test01();
+	return 0;
+}
+
+//开发人员命令提示工具-Developer Command...--查看对象模型
+//跳转盘符 D:
+//跳转文件路径 cd 具体路径下
+//查看命名
+//cl /d1 reportSingleClassLayout类名 文件名
