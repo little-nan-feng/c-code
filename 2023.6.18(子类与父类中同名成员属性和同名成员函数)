@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+
+//class Base
+//{
+//public:
+//	Base()
+//	{
+//		cout << "这是Base的构造函数" << endl;
+//	}
+//
+//	~Base()
+//	{
+//		cout << "这是Base的析构函数" << endl;
+//	}
+//};
+//
+//class Son:public Base
+//{
+//public:
+//	Son()
+//	{
+//		cout << "这是Son的构造函数" << endl;
+//	}
+//
+//	~Son()
+//	{
+//		cout << "这是Son的析构函数" << endl;
+//	}
+//};
+//
+//void test01()
+//{
+//	Son son;
+//}
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+//
+////在继承的情况下，先创建父类，在创建子类
+////先调用父类的构造函数，在调用子类的构造函数，析构函数调用顺序与构造函数相反
+
+
+class Base
+{
+public:
+	int m_A;
+	Base()
+	{
+		m_A = 100;
+	}
+	void func()
+	{
+		cout << "Base的func调用" << endl;
+	}
+	void func(int a)
+	{
+		cout << "Base的func(int a)调用" << endl;
+	}
+};
+
+class Son:public Base
+{
+public:
+	int m_A;
+	Son()
+	{
+		m_A = 200;
+	}
+	void func()
+	{
+		cout << "Son的func调用" << endl;
+	}
+};
+
+
+//同名成员属性
+void test01()
+{
+	Son s;
+	//如果是访问子类下的属性，直接访问即可，如要访问继承父类的成员属性，需要加入作用域
+	cout << "Son下的m_A= " << s.m_A << endl;
+
+
+	//如下就是加入作用域后访问到的父类中的成员属性
+	cout << "Base下的m_A= " << s.Base::m_A << endl;
+}
+
+//同名成员函数
+void test02()
+{
+	Son s;
+	//直接调用是调用Son本身的func函数
+	//s.func();
+
+	//加入作用域，可调用父类中继承的func函数
+	//s.Base::func();
+
+
+	//s.func(200);//父类和子类中有同名函数，编译器会隐藏继承的父类中的成员函数，必须加上作用域才能调用父类的同名成员函数-所以此处会报错
+	//因为子类中没有 有参func函数 定义
+
+	s.Base::func(100);//加上作用域，即可访问继承的同名成员函数
+}
+
+
+int main()
+{
+	//test01();
+	test02();
+	return 0;
+}
+
+//子类对象可以直接访问到子类中的同名成员
+//子类对象加作用域可以访问到父类同名成员
+//当子类与父类拥有同名的成员函数，子类会隐藏父类中的同名成员函数，加作用域可以访问到父类中的同名成员函数
