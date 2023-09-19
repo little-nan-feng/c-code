@@ -1,0 +1,61 @@
+package day_9_13;
+
+import java.time.Month;
+import java.util.Scanner;
+
+
+//判断输入的年月日是一年中的第几天
+public class day_num {
+    public static int monthArray[] = {31,0,31,30,31,30,31,31,30,31,30,31};
+
+    //判断是否是闰年
+    public static int get_yearIsRun(int year) {
+        if((year%4==0&&year%100!=0)||(year%400==0))
+        {
+            System.out.println("是闰年");
+            return 29;//是闰年返回二月是29天
+        }
+        else
+        {
+            System.out.println("不是闰年");
+            return 28;//不是闰年返回二月是28天
+        }
+    }
+
+    //获取天数
+    public static int get_dayNum(int[]arr,int i)
+    {
+        int temp=0;
+        int num=0;
+        for(int n=0;n<i-1;n++)
+        {
+            temp=arr[n];
+            num+=temp;
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sca=new Scanner(System.in);
+        int year=0;
+        int month=0;
+        int day=0;
+        boolean choice;
+        do
+        {
+            System.out.println("请输入年月日：");
+            year=sca.nextInt();
+            month=sca.nextInt();
+            day=sca.nextInt();
+
+            monthArray[1]=get_yearIsRun(year);
+            int T_num=get_dayNum(monthArray,month);
+            System.out.println(year+","+month+","+day+"是该年的第"+(T_num+day)+"天");
+
+            System.out.println("是否继续计算：(1/0)");
+            choice= sca.nextInt() == 1;
+        }while (choice);
+    }
+
+}
