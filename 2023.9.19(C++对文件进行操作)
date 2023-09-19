@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+
+#include<fstream>//包含头文件
+#include<string>
+
+int main()
+{
+	//将数据写入文件
+	ofstream ofs;//输出流--从程序输出到文件中
+	ofs.open("File.txt",ios::out);//打开文件
+
+	ofs << "法外狂徒-张三" << endl
+		<< "法内狂徒-李四" << endl
+		<< "内外横跳-王麻紫" << endl;
+	ofs.close();//关闭文件
+
+
+	//将数据从文件中读出
+	ifstream ifs;//输入流--从文件输入到程序中
+	ifs.open("File.txt", ios::in);//打开文件
+
+	//判断文件是否打开成功
+	if (!ifs.is_open())
+	{
+		cout << "文件打开失败" << endl;
+		return 0;
+	}
+
+
+	////第一种方式--通过右移运算符，利用ifs的右移，将文件中的字符都读到字符数组中
+	//char buf[1024] = { 0 };
+	//while (ifs>>buf)
+	//{
+	//	cout << buf<< endl;
+	//}
+
+	////第二种方式--利用ifs.getline(字符数组名，准备的空间大小--即字符数组的大小)函数，在文件中获取一行字符，然后存放在字符数组中
+	//char buf[1024] = { 0 };
+	//while (ifs.getline(buf, sizeof(buf)))
+	//{
+	//	cout << buf << endl;
+	//}
+
+	////第三种方式--利用getline(输入流对象，字符串名)函数，将文件中的内容读到字符串中
+	//string buf;
+	//while (getline(ifs, buf))
+	//{
+	//	cout << buf << endl;
+	//}
+
+	//第四种方式--利用ifs.get()函数，一个一个字符读到字符c中--不常用，效率低
+	char c;
+	while ((c = ifs.get()) != EOF)//EOF--end of file --文件尾部
+	{
+		cout << c;
+	}
+
+	ifs.close();//关闭文件
+
+
+	return 0;
+}
