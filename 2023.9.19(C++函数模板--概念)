@@ -1,0 +1,91 @@
+#include<iostream>
+using namespace std;
+
+
+////声明一个函数模板，T为通用字符，表示数据类型--可自定义
+//template<typename T> //typename可替换成class -- 效果一样
+////通常函数模板用typename  类模板用class  -- 都用class也可
+//
+////函数模板-两数相加
+//int Myadd(T &a,T &b)
+//{
+//	return a + b;
+//}
+//
+//void test01()
+//{
+//	int a = 10;
+//	int b = 20;
+//
+//	//编译器自动推导出传入的数据类型--必须使用一致的数据类型T，才可以使用--即传入的数据的类型必须一致	
+//	//int n= Myadd(a,b);
+//
+//	//在函数名后用<> ，告诉编译器传入的数据的类型
+//	//必须要确定一个T的数据类型，才可以去使用模板--这里举例，需要设置参数并确定数据类型，编译器才可推导出数据类型
+//	//如果没有参数的函数，则在调用时必须加上<>，标明数据类型
+//	int n=Myadd<int>(a, b);
+//
+//
+//	cout << "a*b= " << n << endl;
+//}
+//
+//int main()
+//{
+//	test01();
+//	return 0;
+//}
+
+
+template<class T>
+//交换函数模板
+void MySwap(T&a,T&b)
+{
+	int temp = 0;
+	temp = a;
+	a = b;
+	b = temp;
+}
+
+//template<class T>
+void MyPrint(int arr[],int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		cout << arr[i] << " ";
+	}
+}
+
+//选择排序
+void MySort(int arr[],int len)
+{
+	for(int i = 0; i < len;i++)
+	{
+		int max = i;
+		for (int j = i + 1; j < len; j++)
+		{
+			if (arr[max] < arr[j])
+			{
+				max = j;
+			}
+		}
+		if (max!=i)
+		{
+			//交换两数
+			MySwap(arr[max],arr[i]);
+		}
+	}
+}
+
+void test01()
+{
+	int arr[5] = { 5,4,3,2,1 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	MySort(arr,len);
+	MyPrint(arr,len);
+}
+
+int main()
+{
+	test01();
+	return 0;
+}
