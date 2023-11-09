@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+
+//函数模板的局限性
+//函数模板不是万能的--它只能推导出基本数据类型，而一些自定义数据类型无法进行推导
+
+
+class Person
+{
+public:
+	Person(int age,string name)
+	{
+		this->age = age;
+		this->name = name;
+	}
+
+	int age;
+	string name;
+};
+
+template <class T>
+bool MyCompare(T& a, T& b)
+{
+	if (a == b)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+//通过具体化这个函数模板来实现模板推导出自定义的数据类型--并且具体化会被优先调用
+template<> bool MyCompare(Person& a, Person& b)
+{
+	if (a.age == b.age && a.name == b.name)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void test01()
+{
+
+	//int a = 10;
+	//int b = 20;
+	//bool temp=MyCompare(a, b);//此时比较可以进行比较--因为是基本类型 int
+	//if (temp == true)
+	//{
+	//	cout << "二者相等" << endl;
+	//}
+	//else
+	//{
+	//	cout << "二者不相等" << endl;
+	//}
+
+
+	Person p1(19, "张三");
+	Person p2(18, "李四");
+	Person p3(19, "张三");
+
+	bool temp = MyCompare(p1, p2);//此时不可以进行比较，函数模板推导不出自定义的 Person 类型
+
+	temp = MyCompare(p1, p3);//此时可以进行比较，通过具体化函数模板，就可以为系统提供两个自定义类型的比较方法
+	//这个目的也可以通过前文学的运算重载来实现--通过重载 == 运算符，让这个运算符可以进行自定义类型的比较
+	//  Person operate == (Person &a , Person &b) { a.age == b.age ; a.name == b.name }--可以达到相同的目的
+
+
+	if (temp == true)
+	{
+		cout << "二者相等" << endl;
+	}
+	else
+	{
+		cout << "二者不相等" << endl;
+	}
+
+
+}
+
+
+//函数模板不是万能的--一些自定义的数据类型是没办法直接用函数模板进行类型推导的
+//利用具体化模板，可以解决自定义类型的通用化
+//学习模板不是为了编写模板，而是为了更好的使用 C++ 标准模板库（STL）中提供的模板
+
+int main()
+{
+	test01();
+
+	return 0;
+}
