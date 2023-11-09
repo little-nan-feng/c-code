@@ -1,0 +1,193 @@
+#include<iostream>
+using namespace std;
+
+#include<algorithm>
+
+//template <typename T >//声明函数模板--通用数据类型 T--typename可以替换成class，都可以
+//template <class T >
+
+//void MySwap(T &a,T &b)//函数模板--两数交换，此时可以不区分数据类型--这就是模板的好处
+//{
+//	T temp;
+//	temp = a;
+//	a = b;
+//	b = temp;
+//}
+
+
+//class Person
+//{
+//private:
+//	int ID=0;
+//	string name=" ";
+//	int age=0;
+//
+//public:
+//
+//	Person()
+//	{
+//
+//	}
+//
+//	Person(int ID,string name,int age)
+//	{
+//		this->ID = ID;
+//		this->name = name;
+//		this->age = age;
+//	}
+//
+//
+//	int GetID()
+//	{
+//		return ID;
+//	}
+//
+//	string getName()
+//	{
+//		return name;
+//	}
+//
+//	int getAge()
+//	{
+//		return age;
+//	}
+//};
+
+//void test01()
+//{
+//	//int a = 1;
+//	//int b = 2;
+//	//MySwap(a,b);
+//	//cout << "a=" << a << endl;
+//	//cout << "b=" << b << endl;
+//
+//	Person s1 = { 001,"张三",18 };
+//	Person s2 = { 002,"李四",20 };
+//
+//	//自动类型推导--要求 T 的数据类型一致，就是传入的参数的数据类型要一致
+//	MySwap(s1,s2);
+//	cout << " " << s1.GetID() << " " << s1.getName() << " " << s1.getAge() << endl;
+//	cout << " " << s2.GetID() << " " << s2.getName() << " " << s2.getAge() << endl;
+//
+//	//显示指定类型--使用尖括号给模板指定出要传入的参数的数据类型
+//	MySwap<Person>(s1,s2);
+//	cout << " " << s1.GetID() << " " << s1.getName() << " " << s1.getAge() << endl;
+//	cout << " " << s2.GetID() << " " << s2.getName() << " " << s2.getAge() << endl;
+//}
+
+
+//注意事项：1、自动类型推导要求 T 的数据类型一致
+//			2、模板必须要确定 T 的数据类型，如果在模板函数中为使用 T 来定义变量，
+//			   则在调用该函数模板时就要使用尖括号指定出 T 的数据类型
+
+
+//交换位置--函数模板
+//template <typename T>
+//void MySwap(T &a,T &b)
+//{
+//	T temp=a;
+//	a = b;
+//	b = temp;
+//
+//}
+
+////打印内容--函数模板
+//template <typename T>
+//void Display(T arr[],int Arr_Length)
+//{
+//	for(int i=0;i<Arr_Length;i++)
+//	{
+//		cout << arr[i] << " ";
+//	}
+//
+//	cout << endl;
+//}
+
+////选择排序--函数模板
+//template <class T>
+//void ChooseSort(T arr[],int Arr_Length)
+//{
+//	int i = 0;
+//	int j = 0;
+//
+//	for (i = 0; i < Arr_Length; i++)
+//	{
+//		int Min = i;
+//		for (j = i + 1; j < Arr_Length; j++)
+//		{
+//			if (arr[Min] > arr[j])
+//			{
+//				Min = j;
+//			}
+//		}
+//		if (Min != i)
+//		{
+//			MySwap(arr[i], arr[Min]);
+//		}
+//
+//	}
+//
+//}
+
+
+//void test02()
+//{
+//	int arr[] = { 5,4,3,2,1 };
+//	ChooseSort(arr, sizeof(arr)/sizeof(arr[0]));
+//	//sort(arr, arr + (sizeof(arr) / sizeof(arr[0])));//使用C++ 自带的sort() 排序算法，默认为升序
+//	//													参数为（数组开始位置，数组结束位置，cmp排序准则(可不写)）
+//	//sort(arr, arr + (sizeof(arr) / sizeof(arr[0])),greater<int>());//加上排序准则 greater<>(),就变为降序，
+//	//																	尖括号内可写 int char 等等类型的数组
+//
+//	Display(arr, sizeof(arr) / sizeof(arr[0]));
+//
+//	char ch[] = "abgiuawui";
+//	ChooseSort(ch, sizeof(ch) / sizeof(char));
+//	//sort(ch, ch + (sizeof(ch) / sizeof(char)));//同上理
+//	//sort(ch, ch + (sizeof(ch) / sizeof(char)), greater<char>());
+//
+//	Display(ch, sizeof(ch) / sizeof(char));
+//
+//}
+
+
+template <class T>
+T MyAdd(T a,T b)
+{
+	return a + b;
+}
+
+int MyAdd(int a, int b)
+{
+	return a + b;
+}
+
+void test03()
+{
+	int a = 10;
+	int b = 9;
+
+	char c = 'c';
+
+	MyAdd(a, c);//此时普通函数可以直接进行隐式类型转换
+
+	//MyAdd(a, b);
+	//MyAdd(a, c);
+	//这个方式不可行，因为在函数模板中，在自动类型推导情况下，
+	//传入两个不同类型的参数，系统不知道推导成哪个类型--不能直接进行隐式类型转换
+
+	//MyAdd<int>(a, c);
+	//这个方式可行，在指定类型的情况下，系统会直接将模板类型推导成指定的那个数据类型--会直接进行隐式类型转换
+	cout << "a+b=" << a + b << endl;
+}
+
+int main()
+{
+	//test01();
+
+	//test02();
+
+	test03();
+
+	return 0;
+}
