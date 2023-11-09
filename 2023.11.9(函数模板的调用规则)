@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+
+void Print()
+{
+	cout << "调用普通函数" << endl;
+}
+
+template <class T>
+void Print(T a,T b)
+{
+	cout << "调用函数模板" << endl;
+}
+
+template <class T>
+void Print(T a,T b,T c)
+{
+	cout << "调用重载函数模板" << endl;
+}
+
+
+void test01()
+{
+	//Print();//此时系统会优先调用普通函数
+
+	//Print<>(10,20);//此时会调用函数模板--此处使用空模板参数列表来强制调用函数模板
+
+	//Print(10,10,20);//此时会调用重载的函数模板--函数模板允许重载
+
+	Print('a', 'b');//此时会优先调用函数模板--系统认为此时将模板 T 推导成 char 型更合适
+	//如果调用普通函数的话，需要将 char 转换成 int 在计算，系统认为不合适
+}
+
+
+//1、如果普通函数和函数模板都可以调用，优先调用普通函数
+//2、可以通过空模板参数列表来强制调用函数模板
+//3、函数模板也可以发生重载
+//4、如果函数模板可以产生更好的匹配，会优先调用函数模板
+
+int main()
+{
+
+	test01();
+
+
+	return 0;
+}
