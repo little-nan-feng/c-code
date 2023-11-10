@@ -1,0 +1,194 @@
+#include <iostream>
+using namespace std;
+
+#include<string>
+
+//class Person1//普通类
+//{
+//public:
+//
+//	Person1(string name,int age)
+//	{
+//		this->name = name;
+//		this->age = age;
+//	}
+//
+//	string name;
+//	int age;
+//};
+//
+//
+////类模板--用通用模板数据类型来代替具体的成员数据类型 
+//template <class NameType,class AgeType = int>//类模板中可以设置默认参数--原则与函数设置默认参数一致
+//class Person2
+//{
+//public:
+//
+//	Person2(NameType name,AgeType age)
+//	{
+//		this->name = name;
+//		this->age = age;
+//	}
+//
+//	NameType name;
+//	AgeType age;
+//
+//
+//};
+
+
+//class Display1
+//{
+//public:
+//	void display1()
+//	{
+//		cout << "show Display1" << endl;
+//	}
+//};
+//
+//
+//class Display2
+//{
+//public:
+//	void display2()
+//	{
+//		cout << "show Display2" << endl;
+//	}
+//};
+//
+//
+//template <class T>
+//class Show
+//{
+//public:
+//
+//	//此时还不确定 T　类型，因此不确定调用那个成员函数
+//	T obj;
+//
+//	void show1()
+//	{
+//		obj.display1();
+//	}
+//
+//	void show2()
+//	{
+//		obj.display2();
+//	}
+//};
+
+
+//void test01()
+//{
+//	//Person1 p1("张三", 19);
+//	//cout << p1.name << p1.age << endl;
+//
+//	//Person2<string, int> p2("李四", 18);//使用类模板实例化对象，此时需要指定传入的参数的类型--不会进行自动类型推导
+//	//cout << p2.name << p2.age << endl;
+//
+//
+//	//Show<Display1> s1;
+//	////s1.show1();//可以调用成功--因为此时创建的对象是 Display1
+//	//s1.show2();//调用失败，就是因为创建对象时确定的 T 的类型是 Display1 ,无法调用 Display2 中的成员函数
+//
+//	//Show<Display2> s2;
+//	//s2.show1();//此时这里就不能调用-- s2 确定的类型是 Display2 的对象
+//	//s2.show2();//在这里就可以调用成功
+//
+//}
+
+
+
+template <class T1,class T2>
+class Person
+{
+public:
+	Person(T1 name,T2 age)
+	{
+		this->name = name;
+		this->age = age;
+	}
+
+	void showPerson()
+	{
+		cout << "名字为： " << this->name<<"  年龄为： " << this->age << endl;
+	}
+
+	T1 name;
+	T2 age;
+};
+
+
+//将类模板成员作为参数传入
+
+//1、指定传入的类型
+//void Print1(Person<string, int>&p)//直接将指定了类模板的类型的对象作为传入参数的数据类型
+//{
+//	p.showPerson();
+//}
+//void test01()
+//{
+//	Person<string, int>p1("张胜男", 19);
+//	Print1(p1);
+//}
+
+
+//2、参数模板化
+//template <class T1,class T2>
+//void Print2(Person<T1,T2>&p)//将传入的对象的属性类型也进行模板化--让系统去推导出传入的参数的属性是什么类型
+//{
+//	p.showPerson();
+//	cout << "T1的类型为：" << typeid(T1).name()<< endl;//typeid().name() 可以查看通用模板推导出的类型名字
+//	cout << "T2的类型为：" << typeid(T2).name() << endl;
+//}
+//
+//void test02()
+//{
+//	Person<string, int>p2("李四", 19);
+//	Print2(p2);
+//}
+
+
+//3、将整个类模板化
+//template <class T>
+//void Print3(T &p)//将作为参数的对象的类型也写成一个模板--让系统去推导出传入的对象是什么类型
+//{
+//	p.showPerson();
+//	cout << "T 的类型为：" << typeid(T).name() << endl;//typeid().name() 可以查看通用模板推导出的类型名字
+//}
+//
+//void test03()
+//{
+//	Person<string, int>p3("王五", 19);
+//	Print3(p3);
+//}
+
+
+
+
+//类模板和函数模板的区别
+//1、类模板不能进行自动类型推导--需要在使用时指定通用参数类型
+//2、类模板可以在通用参数列表中指定默认参数，而函数模板不行
+
+//类模板中的成员函数是在调用时创建的，普通类的成员函数是在一开始就创建好的
+
+//将类模板对象作为参数传入到函数中--在实际中，第一种方式最常用，直接将指定的类模板的类型作为传入参数的类型
+//1、指定传入的类型--//void Print1(Person<string, int>&p)//直接将指定的类模板的类型作为传入参数的数据类型
+
+//2、将参数模板化--//template <class T1,class T2>
+//void Print2(Person<T1,T2>&p)//将传入的参数的属性类型也进行模板化--让系统去推导出传入的参数的属性是什么类型
+
+//3、将整个类模板化--template <class T>
+//void Print3(T& p)//将参数的类型也写成一个模板--让系统去推导出传入的参数是什么类型
+
+int main()
+{
+	//test01();
+
+	//test01();
+
+	//test02();
+
+	//test03();
+
+	return 0;
+}
